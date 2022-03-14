@@ -6,6 +6,7 @@ import QuestionsSection from "../components/elements/QuestionsSection";
 export default function Home() {
   const [index, setIndex] = useState(0);
   const [skills, setSkills] = useState([]);
+  const [dislikes, setDislikes] = useState([]);
   const [jobs, setJobs] = useState([
     {
       title: "Développeur Web",
@@ -35,6 +36,34 @@ export default function Home() {
         "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
       skills: ["organised", "pressure", "versatile", "foreseeing"],
     },
+    {
+      title: "Analyste Digital",
+      img: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      description:
+        "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
+      skills: ["organised", "pressure", "versatile", "foreseeing"],
+    },
+    {
+      title: "Ingénieur Devops",
+      img: "https://images.pexels.com/photos/159304/network-cable-ethernet-computer-159304.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      description:
+        "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
+      skills: ["organised", "pressure", "versatile", "foreseeing"],
+    },
+    {
+      title: "Ingénieur QA",
+      img: "https://images.pexels.com/photos/52608/pexels-photo-52608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940 ",
+      description:
+        "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
+      skills: ["organised", "pressure", "versatile", "foreseeing"],
+    },
+    {
+      title: "Data scientist",
+      img: "https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      description:
+        "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
+      skills: ["organised", "pressure", "versatile", "foreseeing"],
+    },
   ]);
   const [questions, setQuestions] = useState([
     {
@@ -51,7 +80,7 @@ export default function Home() {
     },
     {
       title: "Are you rigorous ?",
-      skill: "creative",
+      skill: "rigorous",
     },
     {
       title: "Do you like planning ?",
@@ -67,8 +96,10 @@ export default function Home() {
         questions={questions}
         setSkills={setSkills}
         skills={skills}
+        dislikes={dislikes}
+        setDislikes={setDislikes}
       />
-      <JobsSection jobs={jobs} skills={skills} />
+      <JobsSection jobs={jobs} skills={skills} dislikes={dislikes} />
     </>
   );
 }

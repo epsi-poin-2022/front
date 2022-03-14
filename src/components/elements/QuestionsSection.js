@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import CustomButton from "../buttons/CustomButton";
 import IconButton from "../buttons/IconButton";
 
 const QuestionContainer = styled.div`
@@ -21,12 +22,19 @@ const QuestionTitle = styled.h2`
   text-align: center;
 `;
 
+const ButtonContainer = styled.div`
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+`;
 export default function QuestionsSection({
   index = 0,
   setIndex = () => {},
   questions = [],
   skills = [],
   setSkills = () => {},
+  dislikes = [],
+  setDislikes = () => {},
 }) {
   const questionBefore = () => {
     index > 0 && setIndex(index - 1);
@@ -38,6 +46,11 @@ export default function QuestionsSection({
 
   const addSkill = () => {
     if (!skills.includes(questions[index].skill)) {
+      if (dislikes.includes(questions[index].skill)) {
+        const itemToRemove = dislikes.indexOf(questions[index].skill);
+        dislikes.splice(itemToRemove, 1);
+        setDislikes([...dislikes]);
+      }
       setSkills([...skills, questions[index].skill]);
       questionAfter();
       return;
@@ -46,10 +59,13 @@ export default function QuestionsSection({
   };
 
   const removeSkill = () => {
-    if (skills.includes(questions[index].skill)) {
-      const itemToRemove = skills.indexOf(questions[index].skill);
-      skills.splice(itemToRemove, 1);
-      setSkills([...skills]);
+    if (!dislikes.includes(questions[index].skill)) {
+      if (skills.includes(questions[index].skill)) {
+        const itemToRemove = skills.indexOf(questions[index].skill);
+        skills.splice(itemToRemove, 1);
+        setSkills([...skills]);
+      }
+      setDislikes([...dislikes, questions[index].skill]);
       questionAfter();
       return;
     }
@@ -58,22 +74,30 @@ export default function QuestionsSection({
   return (
     <QuestionContainer>
       <QuestionNavigation>
-        <IconButton
-          path="img/back-arrow.svg"
-          onClick={() => questionBefore()}
-          alt="Retour"
-        />
+        {index > 0 ? (
+          <IconButton
+            path="img/back-arrow.svg"
+            onClick={() => questionBefore()}
+            alt="Retour"
+          />
+        ) : (
+          <></>
+        )}
         <QuestionTitle>{questions[index].title}</QuestionTitle>
-        <IconButton
-          path="img/next-arrow.svg"
-          onClick={() => questionAfter()}
-          alt="Retour"
-        />
+        {index === questions.length - 1 ? (
+          <></>
+        ) : (
+          <IconButton
+            path="img/next-arrow.svg"
+            onClick={() => questionAfter()}
+            alt="Retour"
+          />
+        )}
       </QuestionNavigation>
-      <div>
-        <span onClick={() => addSkill()}>yes</span>
-        <span onClick={() => removeSkill()}>no</span>
-      </div>
+      <ButtonContainer>
+        <CustomButton title="Yes" onClick={() => addSkill()} />
+        <CustomButton title="No" onClick={() => removeSkill()} />
+      </ButtonContainer>
     </QuestionContainer>
   );
 }

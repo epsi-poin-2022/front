@@ -1,7 +1,7 @@
 import styled from "@emotion/styled/macro";
 import React from "react";
 import { Link } from "react-router-dom";
-import { DARK, LIGHT } from "../../utils/Constants";
+import { BORDER_RADIUS, DARK, LIGHT, TRANSITION } from "../../utils/Constants";
 
 const SectionStyle = styled.div`
   display: grid;
@@ -17,25 +17,25 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   z-index: 1;
-  border-radius: 50px;
+  border-radius: ${BORDER_RADIUS};
   background-color: ${LIGHT};
   transform: translateY(100%);
-  transition: 0.2s ease-in-out;
+  transition: ${TRANSITION};
 `;
 
 const Header = styled.div`
   padding: 2em;
-  border-radius: 50px 0 0 0;
+  border-radius: ${BORDER_RADIUS} 0 0 0;
   background-color: ${(props) => (props.includes ? DARK : LIGHT)};
   transform: translateY(-100%);
-  transition: 0.2s ease-in-out;
+  transition: ${TRANSITION};
 `;
 
 const Card = styled(Link)`
   position: relative;
   display: block;
   height: 100%;
-  border-radius: 50px;
+  border-radius: ${BORDER_RADIUS};
   overflow: hidden;
   text-decoration: none;
   &:hover ${Header} {
@@ -61,15 +61,30 @@ const Description = styled.p`
   padding: 0 2em 2.5em;
   margin: 0;
   color: ${DARK};
-  font-family: "MockFlowFont";
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
 `;
 
-const JobCard = ({ job, skills }) => {
-  const includes = job.skills.some((skill) => skills.includes(skill));
+const Negative = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #444;
+  z-index: 10;
+`;
+
+const JobCard = ({ job, skills, dislikes }) => {
+  let includes = true;
+  if (skills.length === 1 && dislikes.length === 0)
+    includes = job.skills.some((jobSkill) => skills.includes(jobSkill));
+  else
+    includes =
+      !job.skills.some((jobSkill) => dislikes.includes(jobSkill)) &&
+      skills.every((jobSkill) => job.skills.includes(jobSkill));
   const shorten = () => {
     if (job.description.length > 150)
       return job.description.substring(0, 150) + "...";
@@ -79,20 +94,26 @@ const JobCard = ({ job, skills }) => {
     <Card to="/">
       <Image src={job.img} alt={job.title} />
       <Overlay>
-        <Header includes={includes}>
+        <Header>
           <Title>{job.title}</Title>
         </Header>
         <Description>{shorten()}</Description>
       </Overlay>
+      {skills.length > 0 && !includes && <Negative />}
     </Card>
   );
 };
 
-export default function JobsSection({ jobs = [], skills = [] }) {
+export default function JobsSection({ jobs = [], skills = [], dislikes = [] }) {
   return (
     <SectionStyle>
       {jobs.map((job, i) => (
-        <JobCard job={job} key={`job-uid-${i}`} skills={skills} />
+        <JobCard
+          job={job}
+          key={`job-uid-${i}`}
+          skills={skills}
+          dislikes={dislikes}
+        />
       ))}
     </SectionStyle>
   );
