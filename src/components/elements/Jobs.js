@@ -7,7 +7,7 @@ const SectionStyle = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin: 4rem 5vw;
+  padding: 4rem 5vw;
 `;
 
 const Overlay = styled.div`
@@ -74,7 +74,7 @@ const Negative = styled.div`
   bottom: 0;
   right: 0;
   background-color: #444;
-  z-index: 10;
+  z-index: 2;
 `;
 
 const JobCard = ({ job, skills, dislikes }) => {
@@ -104,7 +104,7 @@ const JobCard = ({ job, skills, dislikes }) => {
   );
 };
 
-export default function JobsSection({ jobs = [], skills = [], dislikes = [] }) {
+export default function Jobs({ jobs = [], skills = [], dislikes = [] }) {
   return (
     <SectionStyle>
       {jobs.map((job, i) => (

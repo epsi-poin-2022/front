@@ -7,7 +7,7 @@ const QuestionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px 0;
+  padding: 50px 0;
 `;
 
 const QuestionNavigation = styled.div`
@@ -27,7 +27,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export default function QuestionsSection({
+export default function Questions({
   index = 0,
   setIndex = () => {},
   questions = [],
@@ -98,6 +98,10 @@ export default function QuestionsSection({
         <CustomButton title="Yes" onClick={() => addSkill()} />
         <CustomButton title="No" onClick={() => removeSkill()} />
       </ButtonContainer>
+      <p>
+        Vos choix :{" "}
+        {skills.length > 1 ? skills.map((skill) => `${skill}, `) : skills}
+      </p>
     </QuestionContainer>
   );
 }
