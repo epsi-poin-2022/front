@@ -6,11 +6,13 @@ import {
   Routes as Switch,
 } from "react-router-dom";
 import AppContainer from "./components/containers/AppContainer";
+import About from "./pages/About";
 import Home from "./pages/Home";
-import AddJob from "./pages/Jobs/AddJob";
 import Job from "./pages/Jobs/Job";
-import Jobs from "./pages/Jobs/Jobs";
+import JobsList from "./pages/Jobs/JobsList";
+import AddJob from "./pages/Jobs/AddJob";
 import Login from "./pages/Login";
+import Resources from "./pages/Resources";
 
 export default function Routes() {
   return (
@@ -18,10 +20,12 @@ export default function Routes() {
       <AppContainer>
         <Switch>
           <Route path="/" element={<Home />} />
-          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/jobs" element={<JobsList />} />
           <Route path="/jobs/:id" element={<Job />} />
           <Route path="/jobs/addJob" element={<AddJob />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Switch>
       </AppContainer>

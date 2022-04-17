@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
+import Illustration from "../components/elements/Illustration";
 import JobsCards from "../components/elements/JobsCards";
 import Questions from "../components/elements/Questions";
+import Title from "../components/elements/Title";
 
 const Container = styled.div`
   display: flex;
@@ -19,12 +21,6 @@ const InfoContainer = styled.div`
 const Info = styled.div`
   width: 70%;
   margin-left: auto;
-`;
-
-const Illustration = styled.img`
-  width: 45vw;
-  height: 60vh;
-  opacity: 0.8;
 `;
 
 export default function Home() {
@@ -176,7 +172,7 @@ export default function Home() {
       <Container>
         <InfoContainer>
           <Info>
-            <h1>Présente le numérique</h1>
+            <Title title="Présente le numérique" />
             <h2>
               Donec rhoncus varius ornare. Praesent sed lacinia nisi. Etiam
               euismod in enim eu ornare. Sed bibendum imperdiet orci, nec
@@ -188,9 +184,9 @@ export default function Home() {
             </h2>
           </Info>
         </InfoContainer>
-        <Illustration src="/img/nomad.svg" />
+        <Illustration src="/img/nomad.svg" title="Digital" />
       </Container>
-      <div>
+      <>
         <Questions
           index={index}
           setIndex={setIndex}
@@ -201,7 +197,7 @@ export default function Home() {
           setDislikes={setDislikes}
         />
         <JobsCards jobs={jobs} skills={skills} dislikes={dislikes} />
-      </div>
+      </>
     </>
   );
 }

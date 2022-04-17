@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import CustomButton from "../../components/buttons/CustomButton";
+import Title from "../../components/elements/Title";
 
 const Container = styled.div`
   width: 70%;
@@ -9,8 +10,24 @@ const Container = styled.div`
   justify-content: space-around;
   flex-direction: column;
 `;
+const Row = styled.div`
+  height: 25vh;
+  display: flex;
+  align-content: "center";
+  flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
+  margin-block: 50;
+  align-items: center;
+`;
 
-export default function Jobs() {
+const Info = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-left: ${(props) => (props.reverse ? "25px" : 0)};
+  padding-right: ${(props) => (props.reverse ? 0 : "25px")};
+`;
+export default function JobsList() {
   const [jobsData, setJobsData] = useState([
     {
       title: "Développeur Web",
@@ -127,19 +144,10 @@ export default function Jobs() {
   ]);
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Jobs</h1>
+      <Title title="Jobs" />
       <Container>
         {jobsData.map((job, i) => (
-          <div
-            style={{
-              height: "20vh",
-              display: "flex",
-              alignContent: "center",
-              flexDirection: i % 2 === 0 ? "row" : "row-reverse",
-              marginBlock: 50,
-              alignItems: "center",
-            }}
-          >
+          <Row key={`job-uid-${i}`} reverse={i % 2 !== 0 ? true : false}>
             <div>
               <img
                 src={job.img}
@@ -147,23 +155,14 @@ export default function Jobs() {
                 alt={job.title}
               />
             </div>
-            <div
-              style={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
-                paddingLeft: i % 2 === 0 ? 25 : 0,
-                paddingRight: i % 2 !== 0 ? 25 : 0,
-              }}
-            >
+            <Info reverse={i % 2 === 0 ? true : false}>
               <h2>{job.title}</h2>
               <p>{job.description}</p>
               <div>
                 <CustomButton title="En savoir plus" />
               </div>
-            </div>
-          </div>
+            </Info>
+          </Row>
         ))}
       </Container>
     </>

@@ -39,21 +39,25 @@ const StyledLink = styled(Link)`
 export default function Header() {
   const location = useLocation();
   const isActive = (route) => {
-    if (route === "") return location.pathname === "/";
+    if (route === "/") return location.pathname === "/";
     return location.pathname.includes(route);
   };
   return (
     <StyledHeader>
       <span>Présente le numérique</span>
       <nav>
-        <StyledLink to="/" active={isActive("")}>
+        <StyledLink to="/" active={isActive("/")}>
           Home
         </StyledLink>
-        <StyledLink to="/">About</StyledLink>
+        <StyledLink to="/about" active={isActive("/about")}>
+          About
+        </StyledLink>
         <StyledLink to="/jobs" active={isActive("/jobs")}>
           Jobs
         </StyledLink>
-        <StyledLink to="/">Resources</StyledLink>
+        <StyledLink to="/resources" active={isActive("/resources")}>
+          Resources
+        </StyledLink>
       </nav>
       <span></span>
     </StyledHeader>
