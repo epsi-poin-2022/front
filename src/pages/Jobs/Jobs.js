@@ -1,12 +1,17 @@
+import styled from "@emotion/styled";
 import React, { useState } from "react";
-import Jobs from "../elements/Jobs";
-import Questions from "../elements/Questions";
+import CustomButton from "../../components/buttons/CustomButton";
 
-export default function QuestionsSection() {
-  const [index, setIndex] = useState(0);
-  const [skills, setSkills] = useState([]);
-  const [dislikes, setDislikes] = useState([]);
-  const [jobs, setJobs] = useState([
+const Container = styled.div`
+  width: 70%;
+  margin: 1vh auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+`;
+
+export default function Jobs() {
+  const [jobsData, setJobsData] = useState([
     {
       title: "Développeur Web",
       img: "https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
@@ -118,42 +123,49 @@ export default function QuestionsSection() {
       description:
         "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
       skills: ["organised", "pressure", "versatile", "foreseeing"],
-    },
-  ]);
-  const [questions, setQuestions] = useState([
-    {
-      title: "Are you creative ?",
-      skill: "creative",
-    },
-    {
-      title: "Do you like solving problems ?",
-      skill: "logic",
-    },
-    {
-      title: "Do you have good communication ?",
-      skill: "teamwork",
-    },
-    {
-      title: "Are you rigorous ?",
-      skill: "rigorous",
-    },
-    {
-      title: "Do you like planning ?",
-      skill: "foreseeing",
     },
   ]);
   return (
-    <div>
-      <Questions
-        index={index}
-        setIndex={setIndex}
-        questions={questions}
-        setSkills={setSkills}
-        skills={skills}
-        dislikes={dislikes}
-        setDislikes={setDislikes}
-      />
-      <Jobs jobs={jobs} skills={skills} dislikes={dislikes} />
-    </div>
+    <>
+      <h1 style={{ textAlign: "center" }}>Jobs</h1>
+      <Container>
+        {jobsData.map((job, i) => (
+          <div
+            style={{
+              height: "20vh",
+              display: "flex",
+              alignContent: "center",
+              flexDirection: i % 2 === 0 ? "row" : "row-reverse",
+              marginBlock: 50,
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <img
+                src={job.img}
+                style={{ width: 250, height: 150 }}
+                alt={job.title}
+              />
+            </div>
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+                paddingLeft: i % 2 === 0 ? 25 : 0,
+                paddingRight: i % 2 !== 0 ? 25 : 0,
+              }}
+            >
+              <h2>{job.title}</h2>
+              <p>{job.description}</p>
+              <div>
+                <CustomButton title="En savoir plus" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </Container>
+    </>
   );
 }

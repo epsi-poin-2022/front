@@ -1,7 +1,13 @@
 import styled from "@emotion/styled/macro";
 import React from "react";
 import { Link } from "react-router-dom";
-import { BORDER_RADIUS, DARK, LIGHT, TRANSITION } from "../../utils/Constants";
+import {
+  BORDER_RADIUS,
+  DARK,
+  LIGHT,
+  SHADOW,
+  TRANSITION,
+} from "../../utils/Constants";
 
 const SectionStyle = styled.div`
   display: grid;
@@ -25,7 +31,7 @@ const Overlay = styled.div`
 
 const Header = styled.div`
   padding: 2em;
-  border-radius: ${BORDER_RADIUS} 0 0 0;
+  border-radius: ${BORDER_RADIUS};
   background-color: ${(props) => (props.includes ? DARK : LIGHT)};
   transform: translateY(-100%);
   transition: ${TRANSITION};
@@ -38,6 +44,7 @@ const Card = styled(Link)`
   border-radius: ${BORDER_RADIUS};
   overflow: hidden;
   text-decoration: none;
+  box-shadow: ${SHADOW};
   &:hover ${Header} {
     transform: translateY(0);
   }
@@ -104,7 +111,7 @@ const JobCard = ({ job, skills, dislikes }) => {
   );
 };
 
-export default function Jobs({ jobs = [], skills = [], dislikes = [] }) {
+export default function JobsCards({ jobs = [], skills = [], dislikes = [] }) {
   return (
     <SectionStyle>
       {jobs.map((job, i) => (

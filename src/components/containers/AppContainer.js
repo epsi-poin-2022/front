@@ -13,7 +13,7 @@ export default function AppContainer({ children }) {
   return (
     <StyledContainer>
       <Header />
-      <main>{children}</main>
+      <main style={{ minHeight: "calc(100vh - 180px)" }}>{children}</main>
       <Footer />
     </StyledContainer>
   );
