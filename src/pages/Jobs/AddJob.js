@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../../components/inputs/CustomInput";
 import CustomSelect from "../../components/inputs/CustomSelect";
 import TextEditor from "../../components/inputs/TextEditor";
