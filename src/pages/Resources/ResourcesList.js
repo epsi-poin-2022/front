@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
-import Title from "../components/elements/Title";
-import { DARK } from "../utils/Constants";
+import Title from "../../components/elements/Title";
+import { DARK } from "../../utils/Constants";
 const Container = styled.div`
   width: 70%;
   margin: auto;
@@ -9,7 +9,7 @@ const Container = styled.div`
 const ResourceContainer = styled.div`
   padding-block: 20px;
 `;
-export default function Resources() {
+export default function ResourcesList() {
   const [data, setData] = useState([
     {
       id: 1,

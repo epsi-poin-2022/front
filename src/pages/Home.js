@@ -143,6 +143,9 @@ export default function Home() {
   //   },
   // ]);
   const [jobs, setJobs] = useState();
+  const [rawJobs, setRawJobs] = useState();
+  const [rawSkills, setRawSkills] = useState();
+  const [rawTitles, setRawTitles] = useState();
   const [questions, setQuestions] = useState();
 
   useEffect(() => {
@@ -199,84 +202,145 @@ export default function Home() {
     //       .catch((e) => console.log(e));
     //   })
     //   .catch((e) => console.log(e));
-    let tempJobs = [];
+    // let tempJobs = [];
+    // RequestAPI("GET", "job_descriptions?page=1")
+    //   .then((descriptionsRes) => {
+    //     let descriptionsData = descriptionsRes.data;
+    //     RequestAPI("GET", "skills?page=1")
+    //       .then((skillsRes) => {
+    //         let skillsData = skillsRes.data;
+    //         let tempQuestions = [];
+    //         skillsData.forEach((skill) => {
+    //           let question = {
+    //             skill: skill.name,
+    //             title: skill.question,
+    //           };
+    //           tempQuestions.push(question);
+    //         });
+    //         setQuestions(tempQuestions);
+    //         RequestAPI("GET", "job_titles?page=1")
+    //           .then((titlesRes) => {
+    //             let titlesData = titlesRes.data;
+    //             let arr = descriptionsData;
+    //             let promises = new Promise((resolve, reject) => {
+    //               descriptionsData.forEach((description, i) => {
+    //                 let path = description.picture.split("/api/")[1];
+    //                 RequestAPI("GET", path)
+    //                   .then((res) => {
+    //                     arr.map(() => false);
+    //                     let officialTitle;
+    //                     description.jobTitles.forEach((jobTitle) => {
+    //                       let jobTitleId =
+    //                         jobTitle.split("/api/job_titles/")[1];
+    //                       titlesData.forEach((title) => {
+    //                         if (
+    //                           title.id === parseInt(jobTitleId) &&
+    //                           title.isDefault === true
+    //                         ) {
+    //                           officialTitle = title.label;
+    //                         }
+    //                       });
+    //                     });
+    //                     let temp = description.skills.map(
+    //                       (skill) => skill.split("/api/skills/")[1]
+    //                     );
+    //                     let jobSkills = [];
+    //                     skillsData.forEach((skill) => {
+    //                       if (temp.includes(skill.id.toString())) {
+    //                         jobSkills.push(skill.name);
+    //                       }
+    //                     });
+    //                     const jobInfo = {
+    //                       title: officialTitle,
+    //                       id: description.id,
+    //                       description: description.shortDescription,
+    //                       img: res.data.filePath,
+    //                       skills: jobSkills,
+    //                     };
+    //                     tempJobs.push(jobInfo);
+    //                     arr[i] = true;
+    //                     let ok = true;
+    //                     arr.map((item) => {
+    //                       if (!item) ok = false;
+    //                     });
+    //                     if (ok) {
+    //                       resolve();
+    //                     }
+    //                   })
+    //                   .catch((e) => console.log(e));
+    //               });
+    //             });
+    //             promises.then(() => {
+    //               setJobs(tempJobs);
+    //             });
+    //           })
+    //           .catch((e) => console.log(e));
+    //       })
+    //       .catch((e) => console.log(e));
+    //   })
+    //   .catch((e) => console.log(e));
     RequestAPI("GET", "job_descriptions?page=1")
-      .then((descriptionsRes) => {
-        let descriptionsData = descriptionsRes.data;
-        RequestAPI("GET", "skills?page=1")
-          .then((skillsRes) => {
-            let skillsData = skillsRes.data;
-            let tempQuestions = [];
-            skillsData.forEach((skill) => {
-              let question = {
-                skill: skill.name,
-                title: skill.question,
-              };
-              tempQuestions.push(question);
-            });
-            setQuestions(tempQuestions);
-            RequestAPI("GET", "job_titles?page=1")
-              .then((titlesRes) => {
-                let titlesData = titlesRes.data;
-                let arr = descriptionsData;
-                let promises = new Promise((resolve, reject) => {
-                  descriptionsData.forEach((description, i) => {
-                    let path = description.picture.split("/api/")[1];
-                    RequestAPI("GET", path)
-                      .then((res) => {
-                        arr.map(() => false);
-                        let officialTitle;
-                        description.jobTitles.forEach((jobTitle) => {
-                          let jobTitleId =
-                            jobTitle.split("/api/job_titles/")[1];
-                          titlesData.forEach((title) => {
-                            if (
-                              title.id === parseInt(jobTitleId) &&
-                              title.isDefault === true
-                            ) {
-                              officialTitle = title.label;
-                            }
-                          });
-                        });
-                        let temp = description.skills.map(
-                          (skill) => skill.split("/api/skills/")[1]
-                        );
-                        let jobSkills = [];
-                        skillsData.forEach((skill) => {
-                          if (temp.includes(skill.id.toString())) {
-                            jobSkills.push(skill.name);
-                          }
-                        });
-                        const jobInfo = {
-                          title: officialTitle,
-                          id: description.id,
-                          description: description.shortDescription,
-                          img: res.data.filePath,
-                          skills: jobSkills,
-                        };
-                        tempJobs.push(jobInfo);
-                        arr[i] = true;
-                        let ok = true;
-                        arr.map((item) => {
-                          if (!item) ok = false;
-                        });
-                        if (ok) {
-                          resolve();
-                        }
-                      })
-                      .catch((e) => console.log(e));
-                  });
-                });
-                promises.then(() => {
-                  setJobs(tempJobs);
-                });
-              })
-              .catch((e) => console.log(e));
-          })
-          .catch((e) => console.log(e));
-      })
+      .then((res) => setRawJobs(res.data))
+      .catch((e) => console.log(e));
+    RequestAPI("GET", "skills?page=1")
+      .then((res) => setRawSkills(res.data))
+      .catch((e) => console.log(e));
+    RequestAPI("GET", "job_titles?page=1")
+      .then((res) => setRawTitles(res.data))
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    if (rawJobs && rawSkills && rawTitles) {
+      let tempQuestions = [];
+      rawSkills.forEach((skill) => {
+        let question = {
+          skill: skill.name,
+          title: skill.question,
+        };
+        tempQuestions.push(question);
+      });
+      setQuestions(tempQuestions);
+      let tempJobs = [];
+      rawJobs.forEach((description, i) => {
+        let path = description.picture.split("/api/")[1];
+        RequestAPI("GET", path)
+          .then((res) => {
+            let officialTitle;
+            description.jobTitles.forEach((jobTitle) => {
+              let jobTitleId = jobTitle.split("/api/job_titles/")[1];
+              rawTitles.forEach((title) => {
+                if (
+                  title.id === parseInt(jobTitleId) &&
+                  title.isDefault === true
+                ) {
+                  officialTitle = title.label;
+                }
+              });
+            });
+            let temp = description.skills.map(
+              (skill) => skill.split("/api/skills/")[1]
+            );
+            let jobSkills = [];
+            rawSkills.forEach((skill) => {
+              if (temp.includes(skill.id.toString())) {
+                jobSkills.push(skill.name);
+              }
+            });
+            const jobInfo = {
+              title: officialTitle,
+              id: description.id,
+              description: description.shortDescription,
+              img: res.data.filePath,
+              skills: jobSkills,
+            };
+            tempJobs.push(jobInfo);
+          })
+          .catch((e) => console.log(e));
+      });
+      setJobs(tempJobs);
+    }
+  }, [rawJobs, rawSkills, rawTitles]);
 
   return (
     <>

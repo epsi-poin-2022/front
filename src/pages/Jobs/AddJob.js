@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import CustomInput from "../../components/inputs/CustomInput";
 import CustomSelect from "../../components/inputs/CustomSelect";
 import TextEditor from "../../components/inputs/TextEditor";
+import Title from "./../../components/elements/Title";
 
 const Row = styled.div`
   display: flex;
@@ -76,7 +77,7 @@ export default function AddJob() {
   ];
   return (
     <div style={{ padding: 20 }}>
-      <CustomInput label="Name" setState={setName} />
+      <Title title="Add job" /> <CustomInput label="Name" setState={setName} />
       <CustomInput label="Short Descritpion" setState={setShort} />
       <TextEditor setState={setDescription} />
       <Row>

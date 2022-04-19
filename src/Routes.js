@@ -12,7 +12,8 @@ import Job from "./pages/Jobs/Job";
 import JobsList from "./pages/Jobs/JobsList";
 import AddJob from "./pages/Jobs/AddJob";
 import Login from "./pages/Login";
-import Resources from "./pages/Resources";
+import ResourcesList from "./pages/Resources/ResourcesList";
+import AddResource from "./pages/Resources/AddResource";
 
 export default function Routes() {
   return (
@@ -23,9 +24,10 @@ export default function Routes() {
           <Route path="/about" element={<About />} />
           <Route path="/jobs" element={<JobsList />} />
           <Route path="/jobs/:id" element={<Job />} />
-          <Route path="/jobs/addJob" element={<AddJob />} />
+          <Route path="/resources" element={<ResourcesList />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/resources" element={<Resources />} />
+          <Route path="/admin/addJob" element={<AddJob />} />
+          <Route path="/admin/addResource" element={<AddResource />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Switch>
       </AppContainer>
