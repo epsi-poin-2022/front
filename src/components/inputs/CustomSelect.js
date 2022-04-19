@@ -21,6 +21,7 @@ export default function CustomSelect({
   label = "",
   dataArr = [],
   setState = () => {},
+  multiple = false,
   ...props
 }) {
   return (
@@ -32,7 +33,7 @@ export default function CustomSelect({
             Array.from(e.target.selectedOptions, (option) => option.value)
           )
         }
-        multiple
+        multiple={multiple}
       >
         {dataArr.map((data) => (
           <option value={data.value}>{data.label}</option>
