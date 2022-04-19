@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import CustomButton from "../../components/buttons/CustomButton";
 import Title from "../../components/elements/Title";
-
 const Container = styled.div`
   width: 70%;
   margin: 1vh auto;
@@ -142,6 +141,7 @@ export default function JobsList() {
       skills: ["organised", "pressure", "versatile", "foreseeing"],
     },
   ]);
+
   return (
     <>
       <Title title="Jobs" />

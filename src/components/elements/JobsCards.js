@@ -55,7 +55,8 @@ const Card = styled(Link)`
 
 const Image = styled.img`
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const Title = styled.h3`

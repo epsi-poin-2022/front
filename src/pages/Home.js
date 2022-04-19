@@ -49,7 +49,7 @@ export default function Home() {
     })();
     (async () => {
       try {
-        const res = await RequestAPI("GET", "skills?page=1");
+        const res = await RequestAPI("GET", "job_titles?page=1");
         setRawTitles(res.data);
       } catch (e) {}
     })();
@@ -102,7 +102,7 @@ export default function Home() {
             };
             tempJobs.push(jobInfo);
           } catch (e) {
-            console.log(e);
+            return console.log(e);
           }
         })
       ).then(() => setJobs(tempJobs));
