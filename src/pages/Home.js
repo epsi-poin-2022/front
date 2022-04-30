@@ -101,6 +101,8 @@ export default function Home() {
               skills: jobSkills,
             };
             tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
           } catch (e) {
             return console.log(e);
           }

@@ -23,7 +23,7 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   z-index: 1;
-  border-radius: ${BORDER_RADIUS};
+  // border-radius: ${BORDER_RADIUS};
   background-color: ${LIGHT};
   transform: translateY(100%);
   transition: ${TRANSITION};
@@ -31,8 +31,8 @@ const Overlay = styled.div`
 
 const Header = styled.div`
   padding: 2em;
-  border-radius: ${BORDER_RADIUS};
-  background-color: ${(props) => (props.includes ? DARK : LIGHT)};
+  // border-radius: ${BORDER_RADIUS};
+  background-color: ${LIGHT};
   transform: translateY(-100%);
   transition: ${TRANSITION};
 `;
@@ -41,7 +41,7 @@ const Card = styled(Link)`
   position: relative;
   display: block;
   height: 100%;
-  border-radius: ${BORDER_RADIUS};
+  // border-radius: ${BORDER_RADIUS};
   overflow: hidden;
   text-decoration: none;
   box-shadow: ${SHADOW};
@@ -81,7 +81,8 @@ const Negative = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #444;
+  background-color: #888;
+  opacity: 80%;
   z-index: 2;
 `;
 

@@ -23,9 +23,44 @@ const QuestionTitle = styled.h2`
 `;
 
 const ButtonContainer = styled.div`
-  width: 300px;
+  // width: 300px;
+  padding-block: 25px;
   display: flex;
   justify-content: space-between;
+`;
+
+const Arrow = styled.span`
+  position: relative;
+  display: inline-block;
+  padding: 8px 0;
+  transform: rotate(${(props) => (props.reverse ? "180deg" : "0")});
+  &:before {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #5a5351;
+    top: 50%;
+    transition: width 0.5s ease-out;
+  }
+  &:after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-top: 3px solid #5a5351;
+    border-right: 3px solid #5a5351;
+    transform: rotate(45deg);
+    top: 0;
+    position: absolute;
+    right: 0px;
+  }
+  &:hover {
+    cursor: pointer;
+    &:before {
+      width: 80px;
+    }
+  }
 `;
 export default function Questions({
   index = 0,
@@ -75,23 +110,27 @@ export default function Questions({
     <QuestionContainer>
       <QuestionNavigation>
         {index > 0 ? (
-          <IconButton
-            path="img/back-arrow.svg"
-            onClick={() => questionBefore()}
-            alt="Retour"
-          />
+          <Arrow reverse onClick={() => questionBefore()} />
         ) : (
+          // <IconButton
+          //   path="img/back-arrow.svg"
+          //   onClick={() => questionBefore()}
+          //   alt="Retour"
+          // />
           <></>
         )}
         <QuestionTitle>{questions[index].title}</QuestionTitle>
         {index === questions.length - 1 ? (
           <></>
         ) : (
-          <IconButton
-            path="img/next-arrow.svg"
-            onClick={() => questionAfter()}
-            alt="Retour"
-          />
+          <>
+            <Arrow onClick={() => questionAfter()} />
+          </>
+          // <IconButton
+          //   path="img/next-arrow.svg"
+          //   onClick={() => questionAfter()}
+          //   alt="Retour"
+          // />
         )}
       </QuestionNavigation>
       <ButtonContainer>

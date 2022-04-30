@@ -25,9 +25,9 @@ export default function Routes() {
           <Route path="/jobs" element={<JobsList />} />
           <Route path="/jobs/:id" element={<Job />} />
           <Route path="/resources" element={<ResourcesList />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} />
           <Route path="/admin/addJob" element={<AddJob />} />
-          <Route path="/admin/addResource" element={<AddResource />} />
+          <Route path="/admin/addResource" element={<AddResource />} /> */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Switch>
       </AppContainer>

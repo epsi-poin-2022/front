@@ -26,7 +26,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${(props) => (props.active ? LIGHT : PRIMARY)};
   padding: 10px 35px;
-  border-radius: ${HALF_BORDER_RADIUS};
+  // border-radius: ${HALF_BORDER_RADIUS};
   margin: 0 10px;
   background-color: ${(props) => props.active && PRIMARY};
   &:hover {
@@ -44,7 +44,7 @@ export default function Header() {
   };
   return (
     <StyledHeader>
-      <span>Présente le numérique</span>
+      <span>[Logo]</span>
       <nav>
         <StyledLink to="/" active={isActive("/")}>
           Home
