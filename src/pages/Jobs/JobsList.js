@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../../components/buttons/CustomButton";
 import Title from "../../components/elements/Title";
+import RequestAPI from "../../utils/RequestAPI";
 const Container = styled.div`
   width: 70%;
   margin: 1vh auto;
@@ -10,16 +11,17 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Row = styled.div`
-  height: 25vh;
+  min-height: 20vh;
   display: flex;
   align-content: "center";
   flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
-  margin-block: 50;
+  margin-block: 25px;
   align-items: center;
 `;
 
 const Info = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -27,7 +29,7 @@ const Info = styled.div`
   padding-right: ${(props) => (props.reverse ? 0 : "25px")};
 `;
 export default function JobsList() {
-  const [jobsData, setJobsData] = useState([
+  /*   const [jobs, setJobs] = useState([
     {
       title: "Développeur Web",
       img: "https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
@@ -140,30 +142,92 @@ export default function JobsList() {
         "Etiam iaculis ut velit non efficitur. Quisque vel sagittis lectus. Sed lectus augue, condimentum eu tellus nec, sodales fringilla urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris sit amet neque blandit, lobortis mi a, ornare nisi. Aliquam neque felis, pulvinar nec consequat sit amet, elementum non dui. Quisque pellentesque venenatis massa quis congue. Mauris nulla sem, elementum eu vulputate vel, consectetur non elit. Etiam magna lorem, ullamcorper id varius consequat, accumsan in ipsum. Phasellus nec maximus tellus.",
       skills: ["organised", "pressure", "versatile", "foreseeing"],
     },
-  ]);
+  ]); */
 
+  const [jobs, setJobs] = useState();
+  const [rawJobs, setRawJobs] = useState();
+  const [rawTitles, setRawTitles] = useState();
+  const [questions, setQuestions] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await RequestAPI("GET", "job_descriptions?page=1");
+        setRawJobs(res.data);
+      } catch (e) {}
+    })();
+    (async () => {
+      try {
+        const res = await RequestAPI("GET", "job_titles?page=1");
+        setRawTitles(res.data);
+      } catch (e) {}
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (rawJobs && rawTitles) {
+      let tempQuestions = [];
+
+      setQuestions(tempQuestions);
+      let tempJobs = [];
+      Promise.all(
+        rawJobs.map(async (description) => {
+          let path = description.picture.split("/api/")[1];
+          try {
+            const res = await RequestAPI("GET", path);
+            let officialTitle;
+            description.jobTitles.forEach((jobTitle) => {
+              let jobTitleId = jobTitle.split("/api/job_titles/")[1];
+              rawTitles.forEach((title) => {
+                if (
+                  title.id === parseInt(jobTitleId) &&
+                  title.isDefault === true
+                ) {
+                  officialTitle = title.label;
+                }
+              });
+            });
+            let temp = description.skills.map(
+              (skill) => skill.split("/api/skills/")[1]
+            );
+            console.log(description);
+            const jobInfo = {
+              title: officialTitle,
+              id: description.id,
+              description: description.jobPurpose,
+              img: res.data.filePath,
+            };
+            tempJobs.push(jobInfo);
+          } catch (e) {
+            return console.log(e);
+          }
+        })
+      ).then(() => setJobs(tempJobs));
+    }
+  }, [rawJobs, rawTitles]);
   return (
     <>
-      <Title title="Jobs" />
+      {/* <Title title="Jobs" /> */}
       <Container>
-        {jobsData.map((job, i) => (
-          <Row key={`job-uid-${i}`} reverse={i % 2 !== 0 ? true : false}>
-            <div>
-              <img
-                src={job.img}
-                style={{ width: 250, height: 150 }}
-                alt={job.title}
-              />
-            </div>
-            <Info reverse={i % 2 === 0 ? true : false}>
-              <h2>{job.title}</h2>
-              <p>{job.description}</p>
+        {jobs &&
+          jobs.map((job, i) => (
+            <Row key={`job-uid-${i}`} reverse={i % 2 !== 0 ? true : false}>
               <div>
-                <CustomButton title="En savoir plus" />
+                <img
+                  src={job.img}
+                  style={{ width: 250, height: 150 }}
+                  alt={job.title}
+                />
               </div>
-            </Info>
-          </Row>
-        ))}
+              <Info reverse={i % 2 === 0 ? true : false}>
+                <h2>{job.title}</h2>
+                <p style={{ paddingBlock: 20 }}>{job.description}</p>
+                <div>
+                  <CustomButton title="En savoir plus" />
+                </div>
+              </Info>
+            </Row>
+          ))}
       </Container>
     </>
   );

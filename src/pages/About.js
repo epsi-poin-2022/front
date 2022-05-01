@@ -39,8 +39,8 @@ const rows = [
 ];
 export default function About() {
   return (
-    <>
-      <Title title="About" />
+    <div style={{ paddingBlock: 50 }}>
+      {/* <Title title="About" /> */}
       {rows.map((row, i) => (
         <Container reverse={i % 2 !== 0 ? true : false} key={`row-uid-${i}`}>
           <InfoContainer>
@@ -52,6 +52,6 @@ export default function About() {
           <Illustration src={row.img} title={row.imgLabel} />
         </Container>
       ))}
-    </>
+    </div>
   );
 }

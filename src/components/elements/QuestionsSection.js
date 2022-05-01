@@ -17,13 +17,14 @@ const QuestionNavigation = styled.div`
   width: 100%;
 `;
 
-const QuestionTitle = styled.h2`
+const QuestionTitle = styled.h3`
   width: 50%;
   text-align: center;
 `;
 
 const ButtonContainer = styled.div`
   // width: 300px;
+  gap: 50px;
   padding-block: 25px;
   display: flex;
   justify-content: space-between;
@@ -62,7 +63,7 @@ const Arrow = styled.span`
     }
   }
 `;
-export default function Questions({
+export default function QuestionsSection({
   index = 0,
   setIndex = () => {},
   questions = [],

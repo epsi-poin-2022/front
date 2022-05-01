@@ -16,7 +16,7 @@ const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin: 0px 25px 15px;
+  // margin: 0px 25px 15px;
   min-width: 150px;
 `;
 const ButtonTitle = styled.span`

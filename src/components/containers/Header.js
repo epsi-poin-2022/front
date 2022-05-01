@@ -24,17 +24,35 @@ const StyledHeader = styled.header`
 const StyledLink = styled(Link)`
   font-size: 1.2rem;
   text-decoration: none;
-  color: ${(props) => (props.active ? LIGHT : PRIMARY)};
-  padding: 10px 35px;
-  // border-radius: ${HALF_BORDER_RADIUS};
-  margin: 0 10px;
-  background-color: ${(props) => props.active && PRIMARY};
-  &:hover {
-    background-color: ${PRIMARY};
-    color: ${LIGHT};
-  }
+  text-transform: uppercase;
+  margin-inline: 20px;
+  padding: 15px 20px;
+  min-width: 200px;
+  font-weight: bold;
+  letter-spacing: 2px;
   transition: ${TRANSITION};
+  color: ${(props) => (props.active ? LIGHT : PRIMARY)};
+  background-color: ${(props) => (props.active ? PRIMARY : LIGHT)};
+  border: 1px solid ${(props) => (props.active ? LIGHT : PRIMARY)};
+  &:hover {
+    color: ${LIGHT};
+    background-color: ${PRIMARY};
+  }
 `;
+// const StyledLink = styled(Link)`
+//   font-size: 1.2rem;
+//   text-decoration: none;
+//   color: ${(props) => (props.active ? LIGHT : PRIMARY)};
+//   padding: 10px 35px;
+//   // border-radius: ${HALF_BORDER_RADIUS};
+//   margin: 0 10px;
+//   background-color: ${(props) => props.active && PRIMARY};
+//   &:hover {
+//     background-color: ${PRIMARY};
+//     color: ${LIGHT};
+//   }
+//   transition: ${TRANSITION};
+// `;
 
 export default function Header() {
   const location = useLocation();

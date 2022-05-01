@@ -63,6 +63,7 @@ const Title = styled.h3`
   font-size: 1em;
   margin: 0 0 0.3em;
   color: ${DARK};
+  text-transform: capitalize;
 `;
 
 const Description = styled.p`
@@ -99,8 +100,9 @@ const JobCard = ({ job, skills, dislikes }) => {
       return job.description.substring(0, 150) + "...";
     else return job.description;
   };
+  console.log(job);
   return (
-    <Card to="/">
+    <Card to={`/jobs/${job.id}`}>
       <Image src={job.img} alt={job.title} />
       <Overlay>
         <Header>
@@ -113,7 +115,7 @@ const JobCard = ({ job, skills, dislikes }) => {
   );
 };
 
-export default function JobsCards({ jobs = [], skills = [], dislikes = [] }) {
+export default function JobsSection({ jobs = [], skills = [], dislikes = [] }) {
   return (
     <SectionStyle>
       {jobs.map((job, i) => (

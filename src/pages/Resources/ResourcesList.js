@@ -29,7 +29,6 @@ export default function ResourcesList() {
 
   return (
     <>
-      <Title title="Resources" />
       <Container>
         {data.map((resource) => (
           <ResourceContainer>

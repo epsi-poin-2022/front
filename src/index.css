@@ -22,3 +22,12 @@ code {
   resize: vertical;
   /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); */
 }
+h1,
+h2 {
+  width: fit-content;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px 20px;
+  color: hsl(243, 100%, 69%);
+  border: 1px solid hsl(243, 100%, 69%);
+}

@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import Illustration from "../components/elements/Illustration";
-import JobsCards from "../components/elements/JobsCards";
-import Questions from "../components/elements/Questions";
+import JobsSection from "../components/elements/JobsSection";
+import QuestionsSection from "../components/elements/QuestionsSection";
 import Title from "../components/elements/Title";
+import { PRIMARY } from "../utils/Constants";
 import RequestAPI from "../utils/RequestAPI";
 
 const Container = styled.div`
@@ -23,7 +24,13 @@ const Info = styled.div`
   width: 70%;
   margin-left: auto;
 `;
-
+const StyledTitle = styled.h1`
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px 20px;
+  color: ${PRIMARY};
+  border: 1px solid ${PRIMARY};
+`;
 export default function Home() {
   const [index, setIndex] = useState(0);
   const [skills, setSkills] = useState([]);
@@ -101,8 +108,6 @@ export default function Home() {
               skills: jobSkills,
             };
             tempJobs.push(jobInfo);
-            tempJobs.push(jobInfo);
-            tempJobs.push(jobInfo);
           } catch (e) {
             return console.log(e);
           }
@@ -116,8 +121,9 @@ export default function Home() {
       <Container>
         <InfoContainer>
           <Info>
-            <Title title="Présente le numérique" />
-            <h2>
+            {/* <Title title="Présente le numérique" /> */}
+            <h1>Présente le numérique</h1>
+            <h3 style={{ paddingTop: 25, fontWeight: "normal" }}>
               Donec rhoncus varius ornare. Praesent sed lacinia nisi. Etiam
               euismod in enim eu ornare. Sed bibendum imperdiet orci, nec
               venenatis erat ultrices vitae. Nunc congue nulla ut nibh iaculis
@@ -125,14 +131,14 @@ export default function Home() {
               sed. Duis vitae pretium nunc. Praesent vitae semper lorem. Ut
               suscipit lobortis vehicula. In sodales massa sit amet maximus
               condimentum.
-            </h2>
+            </h3>
           </Info>
         </InfoContainer>
         <Illustration src="/img/nomad.svg" title="Digital" />
       </Container>
       <>
         {questions && (
-          <Questions
+          <QuestionsSection
             index={index}
             setIndex={setIndex}
             questions={questions}
@@ -142,7 +148,9 @@ export default function Home() {
             setDislikes={setDislikes}
           />
         )}
-        {jobs && <JobsCards jobs={jobs} skills={skills} dislikes={dislikes} />}
+        {jobs && (
+          <JobsSection jobs={jobs} skills={skills} dislikes={dislikes} />
+        )}
       </>
     </>
   );
