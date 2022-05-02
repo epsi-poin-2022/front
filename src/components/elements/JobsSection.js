@@ -1,3 +1,4 @@
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled/macro";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -75,7 +76,13 @@ const Description = styled.p`
   -webkit-line-clamp: 3;
   overflow: hidden;
 `;
-
+const fadeIn = keyframes`
+ 0% {
+   opacity: 0%;
+ }
+ 100% {
+   opacity: 70%;
+ }`;
 const Negative = styled.div`
   position: absolute;
   top: 0;
@@ -83,8 +90,9 @@ const Negative = styled.div`
   bottom: 0;
   right: 0;
   background-color: #888;
-  opacity: 80%;
+  opacity: 70%;
   z-index: 2;
+  animation: ${fadeIn} 1s ease-in;
 `;
 
 const JobCard = ({ job, skills, dislikes }) => {

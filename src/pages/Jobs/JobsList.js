@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/buttons/CustomButton";
 import Title from "../../components/elements/Title";
 import RequestAPI from "../../utils/RequestAPI";
@@ -143,11 +144,10 @@ export default function JobsList() {
       skills: ["organised", "pressure", "versatile", "foreseeing"],
     },
   ]); */
-
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState();
   const [rawJobs, setRawJobs] = useState();
   const [rawTitles, setRawTitles] = useState();
-  const [questions, setQuestions] = useState();
 
   useEffect(() => {
     (async () => {
@@ -166,9 +166,6 @@ export default function JobsList() {
 
   useEffect(() => {
     if (rawJobs && rawTitles) {
-      let tempQuestions = [];
-
-      setQuestions(tempQuestions);
       let tempJobs = [];
       Promise.all(
         rawJobs.map(async (description) => {
@@ -187,9 +184,6 @@ export default function JobsList() {
                 }
               });
             });
-            let temp = description.skills.map(
-              (skill) => skill.split("/api/skills/")[1]
-            );
             console.log(description);
             const jobInfo = {
               title: officialTitle,
@@ -223,7 +217,10 @@ export default function JobsList() {
                 <h2>{job.title}</h2>
                 <p style={{ paddingBlock: 20 }}>{job.description}</p>
                 <div>
-                  <CustomButton title="En savoir plus" />
+                  <CustomButton
+                    title="En savoir plus"
+                    onClick={() => navigate(`/jobs/${job.id}`)}
+                  />
                 </div>
               </Info>
             </Row>
