@@ -73,8 +73,6 @@ const Arrow = styled.span`
   }
 `;
 export default function QuestionsSection({
-  // index = 0,
-  // setIndex = () => {},
   questions = [],
   skills = [],
   setSkills = () => {},
@@ -131,16 +129,7 @@ export default function QuestionsSection({
   return (
     <QuestionContainer>
       <QuestionNavigation>
-        {index > 0 ? (
-          <Arrow reverse onClick={() => questionBefore()} />
-        ) : (
-          // <IconButton
-          //   path="img/back-arrow.svg"
-          //   onClick={() => questionBefore()}
-          //   alt="Retour"
-          // />
-          <></>
-        )}
+        {index > 0 ? <Arrow reverse onClick={() => questionBefore()} /> : <></>}
         {currentQuestion && <QuestionTitle>{currentQuestion}</QuestionTitle>}
         {index === questions.length - 1 ? (
           <></>
@@ -148,11 +137,6 @@ export default function QuestionsSection({
           <>
             <Arrow onClick={() => questionAfter()} />
           </>
-          // <IconButton
-          //   path="img/next-arrow.svg"
-          //   onClick={() => questionAfter()}
-          //   alt="Retour"
-          // />
         )}
       </QuestionNavigation>
       <ButtonContainer>
