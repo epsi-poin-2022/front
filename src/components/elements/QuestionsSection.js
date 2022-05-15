@@ -1,5 +1,6 @@
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../buttons/CustomButton";
 import IconButton from "../buttons/IconButton";
 
@@ -16,10 +17,18 @@ const QuestionNavigation = styled.div`
   justify-content: center;
   width: 100%;
 `;
+const fadeIn = keyframes`
+ 0% {
+   opacity: 0%;
+ }
+ 100% {
+   opacity: 100%;
+ }`;
 
 const QuestionTitle = styled.h3`
   width: 50%;
   text-align: center;
+  transition: ${fadeIn} 2s ease;
 `;
 
 const ButtonContainer = styled.div`
@@ -64,14 +73,21 @@ const Arrow = styled.span`
   }
 `;
 export default function QuestionsSection({
-  index = 0,
-  setIndex = () => {},
+  // index = 0,
+  // setIndex = () => {},
   questions = [],
   skills = [],
   setSkills = () => {},
   dislikes = [],
   setDislikes = () => {},
 }) {
+  const [index, setIndex] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState();
+
+  useEffect(() => {
+    setCurrentQuestion(questions[index].title);
+  }, [index]);
+
   const questionBefore = () => {
     index > 0 && setIndex(index - 1);
   };
@@ -107,6 +123,11 @@ export default function QuestionsSection({
     }
     questionAfter();
   };
+  const reset = () => {
+    setDislikes([]);
+    setSkills([]);
+    setIndex(0);
+  };
   return (
     <QuestionContainer>
       <QuestionNavigation>
@@ -120,7 +141,7 @@ export default function QuestionsSection({
           // />
           <></>
         )}
-        <QuestionTitle>{questions[index].title}</QuestionTitle>
+        {currentQuestion && <QuestionTitle>{currentQuestion}</QuestionTitle>}
         {index === questions.length - 1 ? (
           <></>
         ) : (
@@ -137,6 +158,7 @@ export default function QuestionsSection({
       <ButtonContainer>
         <CustomButton title="Yes" onClick={() => addSkill()} />
         <CustomButton title="No" onClick={() => removeSkill()} />
+        <CustomButton title="Reset" onClick={() => reset()} />
       </ButtonContainer>
       <p>
         Vos choix :{" "}

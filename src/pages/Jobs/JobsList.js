@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/buttons/CustomButton";
+import Loader from "../../components/elements/Loader";
 import Title from "../../components/elements/Title";
 import RequestAPI from "../../utils/RequestAPI";
 const Container = styled.div`
@@ -184,7 +185,7 @@ export default function JobsList() {
                 }
               });
             });
-            console.log(description);
+            // console.log(description);
             const jobInfo = {
               title: officialTitle,
               id: description.id,
@@ -203,7 +204,7 @@ export default function JobsList() {
     <>
       {/* <Title title="Jobs" /> */}
       <Container>
-        {jobs &&
+        {jobs ? (
           jobs.map((job, i) => (
             <Row key={`job-uid-${i}`} reverse={i % 2 !== 0 ? true : false}>
               <div>
@@ -224,7 +225,10 @@ export default function JobsList() {
                 </div>
               </Info>
             </Row>
-          ))}
+          ))
+        ) : (
+          <Loader />
+        )}
       </Container>
     </>
   );

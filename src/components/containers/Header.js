@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Link, useLocation } from "react-router-dom";
 import {
-  HALF_BORDER_RADIUS,
+  BORDER_RADIUS,
   LIGHT,
   PRIMARY,
   TRANSITION,
@@ -30,6 +30,7 @@ const StyledLink = styled(Link)`
   min-width: 200px;
   font-weight: bold;
   letter-spacing: 2px;
+  border-radius: ${BORDER_RADIUS}px;
   transition: ${TRANSITION};
   color: ${(props) => (props.active ? LIGHT : PRIMARY)};
   background-color: ${(props) => (props.active ? PRIMARY : LIGHT)};
@@ -39,20 +40,6 @@ const StyledLink = styled(Link)`
     background-color: ${PRIMARY};
   }
 `;
-// const StyledLink = styled(Link)`
-//   font-size: 1.2rem;
-//   text-decoration: none;
-//   color: ${(props) => (props.active ? LIGHT : PRIMARY)};
-//   padding: 10px 35px;
-//   // border-radius: ${HALF_BORDER_RADIUS};
-//   margin: 0 10px;
-//   background-color: ${(props) => props.active && PRIMARY};
-//   &:hover {
-//     background-color: ${PRIMARY};
-//     color: ${LIGHT};
-//   }
-//   transition: ${TRANSITION};
-// `;
 
 export default function Header() {
   const location = useLocation();
@@ -62,7 +49,7 @@ export default function Header() {
   };
   return (
     <StyledHeader>
-      <span>[Logo]</span>
+      <span>Présente le numérique</span>
       <nav>
         <StyledLink to="/" active={isActive("/")}>
           Home
@@ -77,7 +64,7 @@ export default function Header() {
           Resources
         </StyledLink>
       </nav>
-      <span></span>
+      {/* <span></span> */}
     </StyledHeader>
   );
 }

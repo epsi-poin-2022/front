@@ -24,7 +24,7 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   z-index: 1;
-  // border-radius: ${BORDER_RADIUS};
+  // border-radius: ${BORDER_RADIUS}px;
   background-color: ${LIGHT};
   transform: translateY(100%);
   transition: ${TRANSITION};
@@ -42,7 +42,7 @@ const Card = styled(Link)`
   position: relative;
   display: block;
   height: 100%;
-  // border-radius: ${BORDER_RADIUS};
+  border-radius: ${BORDER_RADIUS}px;
   overflow: hidden;
   text-decoration: none;
   box-shadow: ${SHADOW};
@@ -89,26 +89,26 @@ const Negative = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #888;
-  opacity: 70%;
+  background-color: #000;
+  opacity: 50%;
   z-index: 2;
   animation: ${fadeIn} 1s ease-in;
 `;
 
 const JobCard = ({ job, skills, dislikes }) => {
   let includes = true;
-  if (skills.length === 1 && dislikes.length === 0)
-    includes = job.skills.some((jobSkill) => skills.includes(jobSkill));
-  else
-    includes =
-      !job.skills.some((jobSkill) => dislikes.includes(jobSkill)) &&
-      skills.every((jobSkill) => job.skills.includes(jobSkill));
+  // if (skills.length === 1 && dislikes.length === 0)
+  //   includes = job.skills.some((jobSkill) => skills.includes(jobSkill));
+  // else
+  includes =
+    !job.skills.some((jobSkill) => dislikes.includes(jobSkill)) &&
+    skills.every((jobSkill) => job.skills.includes(jobSkill));
   const shorten = () => {
     if (job.description.length > 150)
       return job.description.substring(0, 150) + "...";
     else return job.description;
   };
-  console.log(job);
+  // console.log(job);
   return (
     <Card to={`/jobs/${job.id}`}>
       <Image src={job.img} alt={job.title} />
@@ -118,7 +118,7 @@ const JobCard = ({ job, skills, dislikes }) => {
         </Header>
         <Description>{shorten()}</Description>
       </Overlay>
-      {skills.length > 0 && !includes && <Negative />}
+      {!includes && <Negative />}
     </Card>
   );
 };

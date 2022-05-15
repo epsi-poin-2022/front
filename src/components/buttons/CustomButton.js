@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
 import React from "react";
 import {
-  HALF_BORDER_RADIUS,
+  BORDER_RADIUS,
   LIGHT,
   PRIMARY,
-  SHADOW,
   TRANSITION,
 } from "../../utils/Constants";
 
 const Button = styled.button`
+  font-family: inherit;
+  font-size: inherit;
   position: relative;
   display: inline-block;
   width: auto;
@@ -22,7 +23,6 @@ const Button = styled.button`
 const ButtonTitle = styled.span`
   position: relative;
   display: inline-block;
-  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -33,26 +33,14 @@ const ButtonTitle = styled.span`
   transition: ${TRANSITION};
   color: ${PRIMARY};
   border: 1px solid ${PRIMARY};
+  border-radius: ${BORDER_RADIUS}px;
   &:hover {
     color: ${LIGHT};
     background-color: ${PRIMARY};
   }
 `;
-// const Button = styled.span`
-//   padding: 20px 45px;
-//   background-color: ${PRIMARY};
-//   border-radius: ${HALF_BORDER_RADIUS};
-//   color: ${LIGHT};
-//   text-transform: uppercase;
-//   transition: ${TRANSITION};
-//   &:hover {
-//     cursor: pointer;
-//     box-shadow: ${SHADOW};
-//   }
-// `;
 
 export default function CustomButton({ title = "", onClick = () => {} }) {
-  // return <Button onClick={() => onClick()}>{title}</Button>;
   return (
     <Button onClick={() => onClick()}>
       <ButtonTitle>{title}</ButtonTitle>

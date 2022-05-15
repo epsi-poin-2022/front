@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import Illustration from "../components/elements/Illustration";
 import JobsSection from "../components/elements/JobsSection";
+import Loader from "../components/elements/Loader";
 import QuestionsSection from "../components/elements/QuestionsSection";
-import Title from "../components/elements/Title";
 import { PRIMARY } from "../utils/Constants";
 import RequestAPI from "../utils/RequestAPI";
 
@@ -32,7 +32,7 @@ const StyledTitle = styled.h1`
   border: 1px solid ${PRIMARY};
 `;
 export default function Home() {
-  const [index, setIndex] = useState(0);
+  // const [index, setIndex] = useState(0);
   const [skills, setSkills] = useState([]);
   const [dislikes, setDislikes] = useState([]);
   const [jobs, setJobs] = useState();
@@ -112,7 +112,9 @@ export default function Home() {
             return console.log(e);
           }
         })
-      ).then(() => setJobs(tempJobs));
+      ).then(() => {
+        setJobs(tempJobs);
+      });
     }
   }, [rawJobs, rawSkills, rawTitles]);
 
@@ -121,7 +123,6 @@ export default function Home() {
       <Container>
         <InfoContainer>
           <Info>
-            {/* <Title title="Présente le numérique" /> */}
             <h1>Présente le numérique</h1>
             <h3 style={{ paddingTop: 25, fontWeight: "normal" }}>
               Donec rhoncus varius ornare. Praesent sed lacinia nisi. Etiam
@@ -136,22 +137,21 @@ export default function Home() {
         </InfoContainer>
         <Illustration src="/img/nomad.svg" title="Digital" />
       </Container>
-      <>
-        {questions && (
+
+      {jobs ? (
+        <>
           <QuestionsSection
-            index={index}
-            setIndex={setIndex}
             questions={questions}
             setSkills={setSkills}
             skills={skills}
             dislikes={dislikes}
             setDislikes={setDislikes}
           />
-        )}
-        {jobs && (
           <JobsSection jobs={jobs} skills={skills} dislikes={dislikes} />
-        )}
-      </>
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 }

@@ -1,48 +1,79 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
-import Title from "../../components/elements/Title";
-import { DARK } from "../../utils/Constants";
+import React, { useState, useEffect } from "react";
+import Loader from "../../components/elements/Loader";
+import {
+  BORDER_RADIUS,
+  LIGHT,
+  PRIMARY,
+  TRANSITION,
+} from "../../utils/Constants";
+import RequestAPI from "../../utils/RequestAPI";
+
+const Link = styled.a`
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
+`;
+
+const ResourceItem = styled.h3`
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 20px;
+  transition: ${TRANSITION};
+  color: ${PRIMARY};
+  border: 1px solid ${PRIMARY};
+  border-radius: ${BORDER_RADIUS}px;
+  &:hover {
+    color: ${LIGHT};
+    background-color: ${PRIMARY};
+  }
+`;
 const Container = styled.div`
   width: 70%;
   margin: auto;
 `;
+
 const ResourceContainer = styled.div`
   padding-block: 20px;
 `;
-export default function ResourcesList() {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      label:
-        "Micode x Pôle emploi - Les passionnés du numérique - Développeur Full Stack",
-      link: "https://www.youtube.com/watch?v=RRDSl8OdVrU&list=PLqvVw037WdRWjSlcLW07QEZmJ4NvuCwP6&index=1",
-      jobDescription: "/api/job_descriptions/1",
-    },
-    {
-      id: 2,
-      label:
-        "Micode x Pôle emploi - Les passionnés du numérique - UX/UI Designer",
-      link: "https://www.youtube.com/watch?v=pMFqC3AanII&list=PLqvVw037WdRWjSlcLW07QEZmJ4NvuCwP6&index=5",
-      jobDescription: "/api/job_descriptions/2",
-    },
-  ]);
 
+export default function ResourcesList() {
+  const [data, setData] = useState();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await RequestAPI("GET", "ressources");
+        setData(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
   return (
     <>
       <Container>
-        {data.map((resource) => (
-          <ResourceContainer>
-            <h2>{resource.label}</h2>
-            <a
-              href={resource.link}
-              rel="noreferrer"
-              target="_blank"
-              style={{ textDecoration: "none", color: DARK }}
-            >
-              {resource.link}
-            </a>
-          </ResourceContainer>
-        ))}
+        {data ? (
+          data.map((resource) => (
+            <ResourceContainer>
+              <Link href={resource.link} rel="noreferrer" target="_blank">
+                <ResourceItem>{resource.label}</ResourceItem>
+              </Link>
+            </ResourceContainer>
+          ))
+        ) : (
+          <Loader />
+        )}
       </Container>
     </>
   );

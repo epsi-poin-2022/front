@@ -46,7 +46,7 @@ export default function About() {
           <InfoContainer>
             <Info>
               <h2>{row.title}</h2>
-              <p>{row.text}</p>
+              <p style={{ paddingTop: 10 }}>{row.text}</p>
             </Info>
           </InfoContainer>
           <Illustration src={row.img} title={row.imgLabel} />
