@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import Illustration from "../components/elements/Illustration";
-import JobsSection from "../components/elements/JobsSection";
-import Loader from "../components/elements/Loader";
-import QuestionsSection from "../components/elements/QuestionsSection";
-import { PRIMARY } from "../utils/Constants";
-import RequestAPI from "../utils/RequestAPI";
+import Illustration from "../../components/elements/Illustration";
+import JobsSection from "./JobsSection";
+import Loader from "../../components/elements/Loader";
+import RequestAPI from "../../utils/RequestAPI";
+import QuestionsSection from "./QuestionsSection";
 
 const Container = styled.div`
   display: flex;
@@ -24,15 +23,8 @@ const Info = styled.div`
   width: 70%;
   margin-left: auto;
 `;
-const StyledTitle = styled.h1`
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 15px 20px;
-  color: ${PRIMARY};
-  border: 1px solid ${PRIMARY};
-`;
+
 export default function Home() {
-  // const [index, setIndex] = useState(0);
   const [skills, setSkills] = useState([]);
   const [dislikes, setDislikes] = useState([]);
   const [jobs, setJobs] = useState();

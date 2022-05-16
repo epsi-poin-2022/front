@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
 import Illustration from "../components/elements/Illustration";
-import Title from "../components/elements/Title";
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +39,6 @@ const rows = [
 export default function About() {
   return (
     <div style={{ paddingBlock: 50 }}>
-      {/* <Title title="About" /> */}
       {rows.map((row, i) => (
         <Container reverse={i % 2 !== 0 ? true : false} key={`row-uid-${i}`}>
           <InfoContainer>

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import AppContainer from "./components/containers/AppContainer";
 import About from "./pages/About";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Job from "./pages/Jobs/Job";
 import JobsList from "./pages/Jobs/JobsList";
 import ResourcesList from "./pages/Resources/ResourcesList";

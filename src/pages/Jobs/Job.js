@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import Header from "../../components/containers/Header";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   BORDER_RADIUS,
@@ -28,7 +27,11 @@ const InfoSection = styled.div`
   padding-block: 15px;
 `;
 const InfoTitle = styled.h3`
+  // text-align: center;
   color: ${PRIMARY};
+  text-decoration: underline;
+  font-size: 1.5rem;
+  padding-bottom: 5px;
 `;
 const SchoolGrid = styled.div`
   width: 100%;
@@ -121,7 +124,6 @@ export default function Job() {
 
   useEffect(() => {
     if (rawJob && rawSkills && rawTitles) {
-      // console.log(rawJob);
       (async () => {
         let path = rawJob.picture.split("/api/")[1];
         try {
@@ -150,16 +152,6 @@ export default function Job() {
               jobSkills.push(skill_1.name);
             }
           });
-          // console.log(rawSchools);
-          // let schools = []
-          // rawSchools.forEach((school) => {
-          //   school.jobDescriptions.forEach((job) => {
-          //     let jobId = job.split("/api/job_descriptions/")[1];
-          //     if (jobId === id) {
-          //       schools.push(school);
-          //     }
-          //   });
-          // });
           const jobInfo = {
             ...rawJob,
             title: officialTitle,
@@ -167,14 +159,6 @@ export default function Job() {
             img: res.data.filePath,
             skills: jobSkills,
           };
-          // const jobInfo = {
-          //   title: officialTitle,
-          //   subTitles: subTitles,
-          //   id: rawJob.id,
-          //   description: rawJob.shortDescription,
-          //   img: res.data.filePath,
-          //   skills: jobSkills,
-          // };
           setData([jobInfo]);
         } catch (e) {
           return console.log(e);
@@ -327,23 +311,6 @@ export default function Job() {
         ) : (
           <Loader />
         )}
-        {/* <SectionItem flex>
-          <img
-            src={img}
-            alt={title}
-            style={{ width: "100%", height: "auto", margin: "auto" }}
-          />
-        </SectionItem>
-        <SectionItem>
-          <h1 style={{ textAlign: "center" }}>{title}</h1>
-          <p>
-            Compétences :
-            {skills.map((skill, i) =>
-              i !== skills.length ? ` ${skill},` : skill
-            )}
-          </p>
-          <div dangerouslySetInnerHTML={{ __html: description }} />
-        </SectionItem>  */}
       </Section>
       <Section>
         {schools && (

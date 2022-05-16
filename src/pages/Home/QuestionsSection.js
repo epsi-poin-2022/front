@@ -1,8 +1,7 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
-import CustomButton from "../buttons/CustomButton";
-import IconButton from "../buttons/IconButton";
+import CustomButton from "../../components/buttons/CustomButton";
 
 const QuestionContainer = styled.div`
   display: flex;
@@ -17,18 +16,19 @@ const QuestionNavigation = styled.div`
   justify-content: center;
   width: 100%;
 `;
+
 const fadeIn = keyframes`
  0% {
-   opacity: 0%;
+   opacity: 0;
  }
  100% {
-   opacity: 100%;
+   opacity: 1;
  }`;
 
 const QuestionTitle = styled.h3`
   width: 50%;
   text-align: center;
-  transition: ${fadeIn} 2s ease;
+  animation: ${fadeIn} 1s ease;
 `;
 
 const ButtonContainer = styled.div`
@@ -81,7 +81,6 @@ export default function QuestionsSection({
 }) {
   const [index, setIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState();
-
   useEffect(() => {
     setCurrentQuestion(questions[index].title);
   }, [index]);
@@ -130,7 +129,9 @@ export default function QuestionsSection({
     <QuestionContainer>
       <QuestionNavigation>
         {index > 0 ? <Arrow reverse onClick={() => questionBefore()} /> : <></>}
-        {currentQuestion && <QuestionTitle>{currentQuestion}</QuestionTitle>}
+        {currentQuestion && (
+          <QuestionTitle key={currentQuestion}>{currentQuestion}</QuestionTitle>
+        )}
         {index === questions.length - 1 ? (
           <></>
         ) : (
