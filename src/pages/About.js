@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 import React from "react";
 import Illustration from "../components/elements/Illustration";
+import {
+  ABOUT_FIRST_PARAGRAPH,
+  ABOUT_FIRST_TITLE,
+  ABOUT_SECOND_PARAGRAPH,
+  ABOUT_SECOND_TITLE,
+} from "../utils/ApplicationText";
 
 const Container = styled.div`
   display: flex;
@@ -24,14 +30,14 @@ const Info = styled.div`
 
 const rows = [
   {
-    title: "Partie 1",
-    text: "Donec rhoncus varius ornare. Praesent sed lacinia nisi. Etiam euismod in enim eu ornare. Sed bibendum imperdiet orci, nec venenatis erat ultrices vitae. Nunc congue nulla ut nibh iaculis blandit. Aenean pulvinar ipsum mauris, non malesuada ipsum luctus sed. Duis vitae pretium nunc. Praesent vitae semper lorem. Ut suscipit lobortis vehicula. In sodales massa sit amet maximus condimentum.",
+    title: ABOUT_FIRST_TITLE,
+    text: ABOUT_FIRST_PARAGRAPH,
     img: "/img/web.svg",
     imgLabel: "Web",
   },
   {
-    title: "Partie 2",
-    text: "Donec rhoncus varius ornare. Praesent sed lacinia nisi. Etiam euismod in enim eu ornare. Sed bibendum imperdiet orci, nec venenatis erat ultrices vitae. Nunc congue nulla ut nibh iaculis blandit. Aenean pulvinar ipsum mauris, non malesuada ipsum luctus sed. Duis vitae pretium nunc. Praesent vitae semper lorem. Ut suscipit lobortis vehicula. In sodales massa sit amet maximus condimentum.",
+    title: ABOUT_SECOND_TITLE,
+    text: ABOUT_SECOND_PARAGRAPH,
     img: "/img/world.svg",
     imgLabel: "World",
   },

@@ -29,6 +29,7 @@ const QuestionTitle = styled.h3`
   width: 50%;
   text-align: center;
   animation: ${fadeIn} 1s ease;
+  font-size: 2rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -143,12 +144,16 @@ export default function QuestionsSection({
       <ButtonContainer>
         <CustomButton title="Yes" onClick={() => addSkill()} />
         <CustomButton title="No" onClick={() => removeSkill()} />
-        <CustomButton title="Reset" onClick={() => reset()} />
       </ButtonContainer>
-      <p>
-        Vos choix :{" "}
-        {skills.length > 1 ? skills.map((skill) => `${skill}, `) : skills}
-      </p>
+      {skills.length > 0 && (
+        <>
+          <p>
+            Vos choix :{" "}
+            {skills.length > 1 ? skills.map((skill) => `${skill}, `) : skills}
+          </p>
+          <CustomButton title="Reset" onClick={() => reset()} />
+        </>
+      )}
     </QuestionContainer>
   );
 }

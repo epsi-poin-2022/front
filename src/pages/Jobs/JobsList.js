@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/buttons/CustomButton";
 import Loader from "../../components/elements/Loader";
+import { BUTTON_MORE } from "../../utils/ApplicationText";
 import RequestAPI from "../../utils/RequestAPI";
 const Container = styled.div`
   width: 70%;
@@ -77,6 +78,9 @@ export default function JobsList() {
               img: res.data.filePath,
             };
             tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
           } catch (e) {
             console.log(e);
           }
@@ -102,7 +106,7 @@ export default function JobsList() {
                 <p style={{ paddingBlock: 20 }}>{job.description}</p>
                 <div>
                   <CustomButton
-                    title="En savoir plus"
+                    title={BUTTON_MORE}
                     onClick={() => navigate(`/jobs/${job.id}`)}
                   />
                 </div>

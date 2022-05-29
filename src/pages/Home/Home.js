@@ -5,14 +5,44 @@ import JobsSection from "./JobsSection";
 import Loader from "../../components/elements/Loader";
 import RequestAPI from "../../utils/RequestAPI";
 import QuestionsSection from "./QuestionsSection";
-
+import { APP_TITLE, HOME_PARAGRAPH } from "../../utils/ApplicationText";
 const Container = styled.div`
   display: flex;
   overflow: hidden;
-  height: calc(100vh - 80px);
+  // height: calc(100vh - 80px);
   position: relative;
   align-items: center;
   justify-content: space-around;
+  padding-block: 25px;
+`;
+const BackgroundContainer = styled.div`
+  position: relative;
+  &:after {
+    position: absolute;
+    background-position: center;
+    top: 0;
+    bottom: 0;
+    left: 60%;
+    right: 0;
+    background-image: url("/img/nomad.svg");
+    background-repeat: no-repeat;
+    content: "";
+    z-index: -1;
+    opacity: 50%;
+  }
+  &:before {
+    position: absolute;
+    background-position: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 60%;
+    background-image: url("/img/mobile.svg");
+    background-repeat: no-repeat;
+    content: "";
+    z-index: -1;
+    opacity: 50%;
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -21,7 +51,7 @@ const InfoContainer = styled.div`
 
 const Info = styled.div`
   width: 70%;
-  margin-left: auto;
+  margin: auto;
 `;
 
 export default function Home() {
@@ -100,6 +130,11 @@ export default function Home() {
               skills: jobSkills,
             };
             tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
+            tempJobs.push(jobInfo);
           } catch (e) {
             return console.log(e);
           }
@@ -112,26 +147,8 @@ export default function Home() {
 
   return (
     <>
-      <Container>
-        <InfoContainer>
-          <Info>
-            <h1>Présente le numérique</h1>
-            <h3 style={{ paddingTop: 25, fontWeight: "normal" }}>
-              Donec rhoncus varius ornare. Praesent sed lacinia nisi. Etiam
-              euismod in enim eu ornare. Sed bibendum imperdiet orci, nec
-              venenatis erat ultrices vitae. Nunc congue nulla ut nibh iaculis
-              blandit. Aenean pulvinar ipsum mauris, non malesuada ipsum luctus
-              sed. Duis vitae pretium nunc. Praesent vitae semper lorem. Ut
-              suscipit lobortis vehicula. In sodales massa sit amet maximus
-              condimentum.
-            </h3>
-          </Info>
-        </InfoContainer>
-        <Illustration src="/img/nomad.svg" title="Digital" />
-      </Container>
-
       {jobs ? (
-        <>
+        <BackgroundContainer>
           <QuestionsSection
             questions={questions}
             setSkills={setSkills}
@@ -140,10 +157,22 @@ export default function Home() {
             setDislikes={setDislikes}
           />
           <JobsSection jobs={jobs} skills={skills} dislikes={dislikes} />
-        </>
+          {/* <img /> */}
+        </BackgroundContainer>
       ) : (
         <Loader />
       )}
+      <Container>
+        {/* <InfoContainer> */}
+        <Info>
+          <h1>{APP_TITLE}</h1>
+          <h3 style={{ paddingTop: 25, fontWeight: "normal" }}>
+            {HOME_PARAGRAPH}
+          </h3>
+        </Info>
+        {/* </InfoContainer> */}
+        {/* <Illustration src="/img/nomad.svg" title="Digital" /> */}
+      </Container>
     </>
   );
 }

@@ -2,6 +2,7 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled/macro";
 import React from "react";
 import { Link } from "react-router-dom";
+import GridContainer from "../../components/containers/GridContainer";
 import {
   BORDER_RADIUS,
   DARK,
@@ -125,7 +126,7 @@ const JobCard = ({ job, skills, dislikes }) => {
 
 export default function JobsSection({ jobs = [], skills = [], dislikes = [] }) {
   return (
-    <SectionStyle>
+    <GridContainer>
       {jobs.map((job, i) => (
         <JobCard
           job={job}
@@ -134,6 +135,6 @@ export default function JobsSection({ jobs = [], skills = [], dislikes = [] }) {
           dislikes={dislikes}
         />
       ))}
-    </SectionStyle>
+    </GridContainer>
   );
 }

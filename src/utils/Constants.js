@@ -1,5 +1,5 @@
 // Remember to change primary in index.css
-export const PRIMARY = "hsl(41, 70%, 55%)";
+export const PRIMARY = "#dca83a";
 export const LIGHT = "hsl(0, 0%, 100%)";
 export const DARK = "hsl(0, 0%, 0%)";
 export const BORDER_RADIUS = 20;

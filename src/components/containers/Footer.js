@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import { FOOTER_TEXT } from "../../utils/ApplicationText";
 import { PRIMARY } from "../../utils/Constants";
 const StyledFooter = styled.footer`
   width: 100%;
@@ -10,7 +11,7 @@ const StyledFooter = styled.footer`
 export default function Footer() {
   return (
     <StyledFooter>
-      <p style={{ textAlign: "center" }}>Projet Open Innovation, EPSI 2022</p>
+      <p style={{ textAlign: "center" }}>{FOOTER_TEXT}</p>
     </StyledFooter>
   );
 }

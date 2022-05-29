@@ -7,6 +7,13 @@ import {
   PRIMARY,
   TRANSITION,
 } from "../../utils/Constants";
+import {
+  APP_TITLE,
+  HEADER_ABOUT,
+  HEADER_HOME,
+  HEADER_JOBS,
+  HEADER_RESOURCES,
+} from "../../utils/ApplicationText";
 
 const StyledHeader = styled.header`
   position: sticky;
@@ -49,19 +56,22 @@ export default function Header() {
   };
   return (
     <StyledHeader>
-      <span>Présente le numérique</span>
+      <StyledLink to="/" active>
+        {APP_TITLE}
+      </StyledLink>
+      {/* <span>{APP_TITLE}</span> */}
       <nav>
         <StyledLink to="/" active={isActive("/")}>
-          Home
+          {HEADER_HOME}
         </StyledLink>
         <StyledLink to="/about" active={isActive("/about")}>
-          About
+          {HEADER_ABOUT}
         </StyledLink>
         <StyledLink to="/jobs" active={isActive("/jobs")}>
-          Jobs
+          {HEADER_JOBS}
         </StyledLink>
         <StyledLink to="/resources" active={isActive("/resources")}>
-          Resources
+          {HEADER_RESOURCES}
         </StyledLink>
       </nav>
       {/* <span></span> */}
