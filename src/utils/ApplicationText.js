@@ -19,4 +19,6 @@ export const JOB_CONDITION = "Conditions de travail";
 export const JOB_SALARY = "Rémunération";
 export const JOB_RECRUITMENT = "Recrutement";
 export const FOOTER_TEXT = "Projet Open Innovation, EPSI 2022";
-export const BUTTON_MORE = "en savoir plus";
+export const BUTTON_MORE = "En savoir plus";
+export const BUTTON_OK = "Oui";
+export const BUTTON_NOT_OK = "Non";

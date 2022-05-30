@@ -78,9 +78,6 @@ export default function JobsList() {
               img: res.data.filePath,
             };
             tempJobs.push(jobInfo);
-            tempJobs.push(jobInfo);
-            tempJobs.push(jobInfo);
-            tempJobs.push(jobInfo);
           } catch (e) {
             console.log(e);
           }

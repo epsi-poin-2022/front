@@ -2,6 +2,7 @@ import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
 import CustomButton from "../../components/buttons/CustomButton";
+import { BUTTON_NOT_OK, BUTTON_OK } from "../../utils/ApplicationText";
 
 const QuestionContainer = styled.div`
   display: flex;
@@ -142,8 +143,8 @@ export default function QuestionsSection({
         )}
       </QuestionNavigation>
       <ButtonContainer>
-        <CustomButton title="Yes" onClick={() => addSkill()} />
-        <CustomButton title="No" onClick={() => removeSkill()} />
+        <CustomButton title={BUTTON_OK} onClick={() => addSkill()} />
+        <CustomButton title={BUTTON_NOT_OK} onClick={() => removeSkill()} />
       </ButtonContainer>
       {skills.length > 0 && (
         <>

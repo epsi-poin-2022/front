@@ -105,8 +105,8 @@ const JobCard = ({ job, skills, dislikes }) => {
     !job.skills.some((jobSkill) => dislikes.includes(jobSkill)) &&
     skills.every((jobSkill) => job.skills.includes(jobSkill));
   const shorten = () => {
-    if (job.description.length > 150)
-      return job.description.substring(0, 150) + "...";
+    if (job.description.length > 100)
+      return job.description.substring(0, 100) + "...";
     else return job.description;
   };
   // console.log(job);
