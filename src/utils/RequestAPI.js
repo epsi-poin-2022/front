@@ -8,5 +8,8 @@ export default function RequestAPI(method = "GET", url = "/", data = []) {
     url: APIURL + url,
     data: { data },
     responseType: "json",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   });
 }
