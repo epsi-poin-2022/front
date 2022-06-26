@@ -10,17 +10,23 @@ import {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
+  justify-content: center;
+  flex-direction: column;
+  @media (min-width: 1020px) {
+    flex-direction: row;
+    flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
+    justify-content: space-around;
+    padding-block: 50px;
+  }
   overflow: hidden;
   height: 50vh;
   position: relative;
   align-items: center;
-  justify-content: space-around;
-  padding-block: 50px;
+  margin: auto;
 `;
 
 const InfoContainer = styled.div`
-  width: 45vw;
+  // width: 45vw;
 `;
 
 const Info = styled.div`
@@ -47,13 +53,13 @@ export default function About() {
     <div style={{ paddingBlock: 50 }}>
       {rows.map((row, i) => (
         <Container reverse={i % 2 !== 0 ? true : false} key={`row-uid-${i}`}>
+          <Illustration src={row.img} title={row.imgLabel} />
           <InfoContainer>
             <Info>
               <h2>{row.title}</h2>
               <p style={{ paddingTop: 10 }}>{row.text}</p>
             </Info>
           </InfoContainer>
-          <Illustration src={row.img} title={row.imgLabel} />
         </Container>
       ))}
     </div>

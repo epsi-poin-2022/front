@@ -17,31 +17,33 @@ const Container = styled.div`
 `;
 const BackgroundContainer = styled.div`
   position: relative;
-  &:after {
-    position: absolute;
-    background-position: center;
-    top: 0;
-    bottom: 0;
-    left: 60%;
-    right: 0;
-    background-image: url("/img/nomad.svg");
-    background-repeat: no-repeat;
-    content: "";
-    z-index: -1;
-    opacity: 50%;
-  }
-  &:before {
-    position: absolute;
-    background-position: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 60%;
-    background-image: url("/img/mobile.svg");
-    background-repeat: no-repeat;
-    content: "";
-    z-index: -1;
-    opacity: 50%;
+  @media (min-width: 1020px) {
+    &:after {
+      position: absolute;
+      background-position: center;
+      top: 0;
+      bottom: 0;
+      left: 60%;
+      right: 0;
+      background-image: url("/img/nomad.svg");
+      background-repeat: no-repeat;
+      content: "";
+      z-index: -1;
+      opacity: 50%;
+    }
+    &:before {
+      position: absolute;
+      background-position: center;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 60%;
+      background-image: url("/img/mobile.svg");
+      background-repeat: no-repeat;
+      content: "";
+      z-index: -1;
+      opacity: 50%;
+    }
   }
 `;
 

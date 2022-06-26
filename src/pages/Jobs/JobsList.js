@@ -1,12 +1,46 @@
 import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomButton from "../../components/buttons/CustomButton";
+import Divider from "../../components/elements/Divider";
 import Loader from "../../components/elements/Loader";
 import { BUTTON_MORE } from "../../utils/ApplicationText";
+import {
+  BORDER_RADIUS,
+  LIGHT,
+  PRIMARY,
+  TRANSITION,
+} from "../../utils/Constants";
 import RequestAPI from "../../utils/RequestAPI";
+const StyledLink = styled(Link)`
+  font-size: 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px 20px;
+  margin-inline: 20px;
+  @media (max-width: 1020px) {
+    margin-block: 20px;
+  }
+  // min-width: 200px;
+  width: fit-content;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-radius: ${BORDER_RADIUS}px;
+  transition: ${TRANSITION};
+  color: ${(props) => (props.active ? LIGHT : PRIMARY)};
+  background-color: ${(props) => (props.active ? PRIMARY : LIGHT)};
+  border: 1px solid ${(props) => (props.active ? LIGHT : PRIMARY)};
+  &:hover {
+    color: ${LIGHT};
+    background-color: ${PRIMARY};
+  }
+`;
+
 const Container = styled.div`
-  width: 70%;
+  width: 95%;
+  @media (min-width: 1020px) {
+    width: 70%;
+  }
   margin: 1vh auto;
   display: flex;
   justify-content: space-around;
@@ -15,9 +49,12 @@ const Container = styled.div`
 const Row = styled.div`
   min-height: 20vh;
   display: flex;
+  flex-direction: column;
+  @media (min-width: 1020px) {
+    flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
+  }
   align-content: "center";
-  flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
-  margin-block: 25px;
+  margin-block: 50px;
   align-items: center;
 `;
 
@@ -27,8 +64,19 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding-left: ${(props) => (props.reverse ? "25px" : 0)};
-  padding-right: ${(props) => (props.reverse ? 0 : "25px")};
+  @media (max-width: 1020px) {
+    align-items: center;
+  }
+  @media (min-width: 1020px) {
+    padding-left: ${(props) => (props.reverse ? "25px" : 0)};
+    padding-right: ${(props) => (props.reverse ? 0 : "25px")};
+  }
+`;
+
+const ButtonContainer = styled.div`
+  @media (min-width: 1020px) {
+    margin-left: auto;
+  }
 `;
 export default function JobsList() {
   const navigate = useNavigate();
@@ -90,25 +138,28 @@ export default function JobsList() {
       <Container>
         {jobs ? (
           jobs.map((job, i) => (
-            <Row key={`job-uid-${i}`} reverse={i % 2 !== 0 ? true : false}>
-              <div>
-                <img
-                  src={job.img}
-                  style={{ width: 250, height: 150 }}
-                  alt={job.title}
-                />
-              </div>
-              <Info reverse={i % 2 === 0 ? true : false}>
-                <h2>{job.title}</h2>
-                <p style={{ paddingBlock: 20 }}>{job.description}</p>
+            <>
+              <Row key={`job-uid-${i}`} reverse={i % 2 !== 0 ? true : false}>
                 <div>
-                  <CustomButton
-                    title={BUTTON_MORE}
-                    onClick={() => navigate(`/jobs/${job.id}`)}
+                  <img
+                    src={job.img}
+                    style={{ maxWidth: 250, mawHeight: 150 }}
+                    alt={job.title}
                   />
                 </div>
-              </Info>
-            </Row>
+                <Info reverse={i % 2 === 0 ? true : false}>
+                  <StyledLink to={`/jobs/${job.id}`}>{job.title}</StyledLink>
+                  <p style={{ paddingBlock: 20 }}>{job.description}</p>
+                  <ButtonContainer>
+                    <CustomButton
+                      title={BUTTON_MORE}
+                      onClick={() => navigate(`/jobs/${job.id}`)}
+                    />
+                  </ButtonContainer>
+                </Info>
+              </Row>
+              <Divider />
+            </>
           ))
         ) : (
           <Loader />

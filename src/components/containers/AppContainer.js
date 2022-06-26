@@ -13,7 +13,9 @@ export default function AppContainer({ children }) {
   return (
     <StyledContainer>
       <Header />
-      <main style={{ minHeight: "calc(100vh - 260px)" }}>{children}</main>
+      <main style={{ minHeight: "calc(100vh - 260px)" }} id="page-wrap">
+        {children}
+      </main>
       <Footer />
     </StyledContainer>
   );

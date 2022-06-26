@@ -23,13 +23,20 @@ import {
 } from "../../utils/ApplicationText";
 
 const Section = styled.div`
-  width: 80%;
-  margin: 5vh auto;
-  display: flex;
-  justify-content: space-around;
+  padding: 20px;
+  @media (min-width: 1020px) {
+    margin: 5vh auto;
+    // display: block;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+  }
 `;
 const SectionItem = styled.div`
-  width: 48%;
+  padding: 10px;
+  @media (min-width: 1020px) {
+    width: 48%;
+  }
   display: ${(props) => props.flex && "flex"};
 `;
 const InfoSection = styled.div`

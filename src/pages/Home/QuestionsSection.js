@@ -146,11 +146,24 @@ export default function QuestionsSection({
         <CustomButton title={BUTTON_OK} onClick={() => addSkill()} />
         <CustomButton title={BUTTON_NOT_OK} onClick={() => removeSkill()} />
       </ButtonContainer>
-      {skills.length > 0 && (
+      {(skills.length > 0 || dislikes.length > 0) && (
         <>
           <p>
             Vos choix :{" "}
             {skills.length > 1 ? skills.map((skill) => `${skill}, `) : skills}
+            {dislikes.length > 1 ? (
+              dislikes.map((skill) => {
+                return (
+                  <span>
+                    <strike>{skill}</strike>,
+                  </span>
+                );
+              })
+            ) : (
+              <span>
+                <strike>{dislikes}</strike>
+              </span>
+            )}
           </p>
           <CustomButton title="Reset" onClick={() => reset()} />
         </>
