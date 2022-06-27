@@ -35,7 +35,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   text-transform: uppercase;
   padding: 15px 20px;
-  @media (in-width: 1020px) {
+  @media (min-width: 1020px) {
     margin-inline: 20px;
   }
   @media (max-width: 1020px) {
