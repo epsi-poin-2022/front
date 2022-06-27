@@ -30,7 +30,10 @@ const QuestionTitle = styled.h3`
   width: 50%;
   text-align: center;
   animation: ${fadeIn} 1s ease;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  @media (min-width: 1020px) {
+    font-size: 2rem;
+  }
 `;
 
 const ButtonContainer = styled.div`
